@@ -1,0 +1,43 @@
+1) Eureka Url: http://localhost:8761/
+
+2) CURRENCY EXCHANGE MICROSERVICES:
+ 
+a) 
+Currency Exchange Microservice Instance 1: 
+http://localhost:8000/currency-exchange/from/usd/to/inr
+
+b)
+Currency Exchange Microservice Instance 2: 
+http://localhost:8001/currency-exchange/from/usd/to/inr
+
+3) CURRENCY CONVERSION MICROSERVICE
+
+a) 
+Currency Conversion Microservice with feign: 
+http://localhost:8100/currency-conversion-feign/from/usd/to/inr/quantity/10
+
+b)
+Currency Conversion Microservice without feign using resttemplate: 
+http://localhost:8100/currency-conversion/from/usd/to/inr/quantity/10
+
+4) API GATEWAY:
+
+*) Using Spring.cloud.gateway.discovery.locator.enabled=true property:
+
+http://localhost:8765/CURRENCY-EXCHANGE/currency-exchange/from/usd/to/inr
+http://localhost:8765/CURRENCY-CONVERSION/currency-conversion/from/usd/to/inr/quantity/10
+http://localhost:8765/CURRENCY-CONVERSION/currency-conversion-feign/from/usd/to/inr/quantity/10
+
+*) Using Spring.cloud.gateway.discovery.locator.lowerCaseServiceId=true
+CURRENCY-EXCHANGE in the above url on 27 gets converted to lower case like line no 34.
+
+http://localhost:8765/currency-exchange/currency-exchange/from/usd/to/inr
+http://localhost:8765/currency-conversion/currency-conversion/from/usd/to/inr/quantity/10
+http://localhost:8765/currency-conversion/currency-conversion-feign/from/usd/to/inr/quantity/10
+
+*) USING ROUTER CONFIGURATION (after changes in routerlocator):
+
+http://localhost:8765/currency-exchange/from/usd/to/inr
+http://localhost:8765/currency-conversion/from/usd/to/inr/quantity/10
+http://localhost:8765/currency-conversion-feign/from/usd/to/inr/quantity/10
+http://localhost:8765/currency-conversion-new/from/usd/to/inr/quantity/10
